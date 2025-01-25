@@ -1,0 +1,15 @@
+# Ignore node_modules in both folders
+Client/node_modules/
+Server/node_modules/
+
+# Ignore system files
+*.log
+.DS_Store
+
+# Ignore platform-specific files (React Native)
+Client/android/
+Client/ios/
+
+# Ignore environment variables
+Server/.env
+Client/.env
