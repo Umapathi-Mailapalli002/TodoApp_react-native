@@ -17,10 +17,10 @@ const App = () => {
 const styles = StyleSheet.create({
   heading: {
     fontSize: 30,
-    color: "#fff",
+    color: "#0000ff",
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 10
+    marginTop: 40,
   }
 })
 export default App;

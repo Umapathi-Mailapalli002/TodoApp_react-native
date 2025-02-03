@@ -1,7 +1,7 @@
 import axios from "axios";
-import {API_BASE_URL} from "@env"
+import API_BASE from "../config/index.js";
 const axiosInstance = axios.create({
-    baseURL: API_BASE_URL,
+    baseURL: API_BASE,
     withCredentials: true,
 })
 
