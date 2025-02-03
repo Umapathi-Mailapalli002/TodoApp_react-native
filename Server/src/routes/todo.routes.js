@@ -5,7 +5,7 @@ import {
   getAllTodos,
   toggleCompleted,
   updateTodo,
-} from "../controllers/todo.controllers";
+} from "../controllers/todo.controllers.js";
 
 const router = Router();
 
