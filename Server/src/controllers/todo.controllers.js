@@ -3,12 +3,12 @@ import { Todo } from "../models/todo.model.js";
 // Create a Todo
 const createTodo = async (req, res) => {
   try {
-    const { title, content } = req.body;
-    if (!title || !content) {
+    const { title, description } = req.body;
+    if (!title || !description) {
       return res.status(400).json({ success: false, message: "Title and content are required", data: {} });
     }
 
-    const setTodo = await Todo.create({ title, content });
+    const setTodo = await Todo.create({ title, description });
 
     return res.status(201).json({
       success: true,
@@ -24,14 +24,14 @@ const createTodo = async (req, res) => {
 // Update a Todo
 const updateTodo = async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { title, description } = req.body;
     const { id } = req.params; 
     
-    if (!title || !content) {
+    if (!title || !description) {
       return res.status(400).json({ success: false, message: "Title and content are required", data: {} });
     }
 
-    const updatedTodo = await Todo.findByIdAndUpdate(id, { $set: { title, content } }, { new: true });
+    const updatedTodo = await Todo.findByIdAndUpdate(id, { $set: { title, description } }, { new: true });
 
     if (!updatedTodo) {
       return res.status(404).json({ success: false, message: "Todo not found", data: {} });

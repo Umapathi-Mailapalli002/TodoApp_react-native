@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../utils/axiosInstance";
 
-export const createTodo = createAsyncThunk('todos/createTodo', async({title, content}, {rejectWithValue})=> {
+export const createTodo = createAsyncThunk('todos/createTodo', async({title, description}, {rejectWithValue})=> {
    try {
-     const response = await axiosInstance.post('/', {title, content})
+     const response = await axiosInstance.post('/', {title, description})
      return response.data;
    } catch (error) {
     return rejectWithValue(
@@ -27,9 +27,9 @@ export const getAllTodos = createAsyncThunk('todos/getAllTodos', async(_, {rejec
     }
 })
 
-export const updateTodo = createAsyncThunk('todos/updateTodo', async({title, content, id}, {rejectWithValue}) => {
+export const updateTodo = createAsyncThunk('todos/updateTodo', async({title, description, id}, {rejectWithValue}) => {
     try {
-        const response = await axiosInstance.patch(`/${id}`, {title, content})
+        const response = await axiosInstance.patch(`/${id}`, {title, description})
         return {...response.data, id};
     } catch (error) {
         return rejectWithValue(
