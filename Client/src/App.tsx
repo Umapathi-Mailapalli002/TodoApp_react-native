@@ -1,12 +1,12 @@
 import { store } from "../store/index";
 import { Provider } from "react-redux";
 import Todo from "./Todo";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 const App = () => {
   return (<Provider store={store}>
     <SafeAreaView>
-      <View>
+      <View style={styles.container}>
         <Text style={styles.heading}>Todo App</Text>
       <Todo />
       </View>
@@ -15,12 +15,16 @@ const App = () => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 15
+  },
   heading: {
     fontSize: 30,
     color: "#0000ff",
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 40,
+    marginVertical: 30
   }
 })
 export default App;
