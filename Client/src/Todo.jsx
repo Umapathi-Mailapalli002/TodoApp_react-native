@@ -9,11 +9,16 @@ const Todo = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.timeText}>03/02/2025 11:30</Text>
+
+      {/* Content Section */}
       <View style={styles.innerContainer}>
-        <View>
+        {/* Text Section */}
+        <View style={styles.textContainer}>
           <Text style={styles.title}>Title</Text>
           <Text style={styles.description}>Description</Text>
         </View>
+
+        {/* Icons Section */}
         <View style={styles.iconsContainer}>
           <BouncyCheckbox
             size={25}
@@ -21,7 +26,7 @@ const Todo = () => {
             unFillColor="#FFFFFF"
             iconStyle={{ borderColor: 'red' }}
             innerIconStyle={{ borderWidth: 2 }}
-            onPress={(checked) => setIsChecked(!isChecked)}
+            onPress={() => setIsChecked(!isChecked)}
           />
           <Icon name="delete-outline" size={30} color="red" />
         </View>
@@ -33,11 +38,20 @@ const Todo = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FAF3E0',
-    padding: 7,
+    padding: 10,
   },
   timeText: {
     textAlign: 'right',
     fontSize: 14,
+    marginBottom: 5,
+  },
+  innerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  textContainer: {
+    flex: 1, // Allows text to take up remaining space
   },
   title: {
     fontSize: 22,
@@ -45,15 +59,12 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 18,
-  },
-  innerContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    color: '#555',
   },
   iconsContainer: {
-    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10, // Adds spacing between checkbox and delete icon
   },
 });
 
