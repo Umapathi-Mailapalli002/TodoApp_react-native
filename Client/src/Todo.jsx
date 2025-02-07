@@ -1,10 +1,9 @@
-import { View, Text, StyleSheet } from 'react-native'
-import CheckBox from '@react-native-community/checkbox';
-import React, { useState } from 'react' // Import useState
-
+import {View, Text, StyleSheet} from 'react-native';
+import React, {useState} from 'react'; // Import useState
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 const Todo = () => {
-  const [isChecked, setIsChecked] = useState(false); 
-
+  const [isChecked, setIsChecked] = useState(false);
+console.log(isChecked);
   return (
     <View style={styles.container}>
       <Text style={styles.timeText}>03/02/2025 11:30</Text>
@@ -14,21 +13,27 @@ const Todo = () => {
           <Text style={styles.description}>description</Text>
         </View>
         <View>
-        <CheckBox
-          value={isChecked} // Current state
-          onValueChange={setIsChecked} 
-          tintColors={{ true: '#2196F3', false: '#ccc' }} 
-        />
+          <BouncyCheckbox
+            size={25}
+            fillColor="red"
+            unFillColor="#FFFFFF"
+            text=""
+            iconStyle={{borderColor: 'red'}}
+            innerIconStyle={{borderWidth: 2}}
+            textStyle={{fontFamily: 'JosefinSans-Regular'}}
+            onPress={(checked) => setIsChecked(!isChecked)}
+          />
+          
         </View>
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FAF3E0",
-    padding: 7
+    backgroundColor: '#FAF3E0',
+    padding: 7,
   },
   timeText: {
     textAlign: 'right',
@@ -36,11 +41,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontWeight: '600'
+    fontWeight: '600',
   },
   description: {
     fontSize: 18,
-  }
-})
+  },
+});
 
 export default Todo;
