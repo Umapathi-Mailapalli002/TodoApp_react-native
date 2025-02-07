@@ -1,5 +1,6 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React, {useState} from 'react'; // Import useState
+import React, {useState} from 'react';
+import Entypo from 'react-native-vector-icons/Entypo;
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 const Todo = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -9,6 +10,7 @@ console.log(isChecked);
       <Text style={styles.timeText}>03/02/2025 11:30</Text>
       <View>
         <View>
+          
           <Text style={styles.title}>title</Text>
           <Text style={styles.description}>description</Text>
         </View>
@@ -23,7 +25,7 @@ console.log(isChecked);
             textStyle={{fontFamily: 'JosefinSans-Regular'}}
             onPress={(checked) => setIsChecked(!isChecked)}
           />
-          
+          <Icons.Entypo name="camera" size={30} color="red" />
         </View>
       </View>
     </View>
