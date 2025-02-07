@@ -1,31 +1,29 @@
-import {View, Text, StyleSheet} from 'react-native';
-import React, {useState} from 'react';
-import Entypo from 'react-native-vector-icons/Entypo;
+import { View, Text, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+
 const Todo = () => {
   const [isChecked, setIsChecked] = useState(false);
-console.log(isChecked);
+
   return (
     <View style={styles.container}>
       <Text style={styles.timeText}>03/02/2025 11:30</Text>
-      <View>
+      <View style={styles.innerContainer}>
         <View>
-          
-          <Text style={styles.title}>title</Text>
-          <Text style={styles.description}>description</Text>
+          <Text style={styles.title}>Title</Text>
+          <Text style={styles.description}>Description</Text>
         </View>
-        <View>
+        <View style={styles.iconsContainer}>
           <BouncyCheckbox
             size={25}
             fillColor="red"
             unFillColor="#FFFFFF"
-            text=""
-            iconStyle={{borderColor: 'red'}}
-            innerIconStyle={{borderWidth: 2}}
-            textStyle={{fontFamily: 'JosefinSans-Regular'}}
+            iconStyle={{ borderColor: 'red' }}
+            innerIconStyle={{ borderWidth: 2 }}
             onPress={(checked) => setIsChecked(!isChecked)}
           />
-          <Icons.Entypo name="camera" size={30} color="red" />
+          <Icon name="delete-outline" size={30} color="red" />
         </View>
       </View>
     </View>
@@ -47,6 +45,15 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 18,
+  },
+  innerContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  iconsContainer: {
+    flex: 1,
   },
 });
 
