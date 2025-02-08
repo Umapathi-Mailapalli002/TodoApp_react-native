@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
@@ -20,15 +20,19 @@ const Todo = () => {
 
         {/* Icons Section */}
         <View style={styles.iconsContainer}>
-          <BouncyCheckbox
+          <View>
+          <BouncyCheckbox 
             size={25}
             fillColor="red"
             unFillColor="#FFFFFF"
-            iconStyle={{ borderColor: 'red' }}
-            innerIconStyle={{ borderWidth: 2 }}
+            iconStyle={{borderColor: 'red'}}
+            innerIconStyle={{borderWidth: 2}}
             onPress={() => setIsChecked(!isChecked)}
           />
-          <Icon name="delete-outline" size={30} color="red" />
+          </View>
+          <View>
+          <Icon  name="delete-outline" size={30} color="red" />
+          </View>
         </View>
       </View>
     </View>
@@ -46,6 +50,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   innerContainer: {
+    flex: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -62,9 +67,10 @@ const styles = StyleSheet.create({
     color: '#555',
   },
   iconsContainer: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10, // Adds spacing between checkbox and delete icon
+    justifyContent: 'flex-end',
   },
 });
 
