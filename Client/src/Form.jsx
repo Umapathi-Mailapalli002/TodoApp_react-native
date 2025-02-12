@@ -1,4 +1,4 @@
-import {Button, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 
 const Form = () => {
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',
-    marginVertical: 10
+    marginVertical: 8
   },
   buttonText: {
     color: 'white',

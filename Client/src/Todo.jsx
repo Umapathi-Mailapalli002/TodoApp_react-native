@@ -41,6 +41,7 @@ const Todo = () => {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 15,
     backgroundColor: '#FAF3E0',
     padding: 10,
   },
