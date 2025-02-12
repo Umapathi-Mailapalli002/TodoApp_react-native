@@ -2,12 +2,14 @@ import { store } from "../store/index";
 import { Provider } from "react-redux";
 import Todo from "./Todo";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import Form from "./Form";
 
 const App = () => {
   return (<Provider store={store}>
     <SafeAreaView>
       <View style={styles.container}>
         <Text style={styles.heading}>Todo App</Text>
+        <Form />
       <Todo />
       </View>
     </SafeAreaView>
