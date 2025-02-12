@@ -13,13 +13,6 @@ const App = () => {
   const {data} = useSelector(state => state.todos.todos);
   console.log(data);
 
-  const handleComplete = (item) => {
-    console.log(item.isCompleted)
-    dispatch(toggleComplete({
-      id: item._id,
-      isCompleted: !item.isCompleted,
-    }))
-  }
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -28,7 +21,20 @@ const App = () => {
         <FlatList
           data={data}
           keyExtractor={item => item._id}
-          renderItem={({item}) => <Todo todo={item} toggleToComplete={() => handleComplete(item)} onClick={() => dispatch(deleteTodo({id:item._id}))}/>}
+          renderItem={({item}) => (
+            <Todo
+              todo={item}
+              toggleToComplete={() =>
+                dispatch(
+                  toggleComplete({
+                    id: item._id,
+                    isCompleted: !item.isCompleted,
+                  }),
+                )
+              }
+              onClick={() => dispatch(deleteTodo({id: item._id}))}
+            />
+          )}
         />
       </View>
     </SafeAreaView>

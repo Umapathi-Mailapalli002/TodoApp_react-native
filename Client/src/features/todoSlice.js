@@ -5,14 +5,22 @@ export const createTodo = createAsyncThunk(
   'todos/createTodo',
   async ({title, description}, {rejectWithValue}) => {
     try {
-      const response = await axiosInstance.post('/', {title, description});
+      const response = await axiosInstance.post('/', {title, description},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        }
+      );
       return response.data;
     } catch (error) {
-      return rejectWithValue(
-        error.response?.data?.message ||
-          error.message ||
-          'Error on adding todo',
-      );
+      // Extract a plain error message (or a simple object)
+      const errorMessage =
+        error.response?.data?.message || error.message || 'Error on adding todo';
+      
+      console.error('Axios Error:', errorMessage);
+      return rejectWithValue(errorMessage);
     }
   },
 );
@@ -73,7 +81,7 @@ export const toggleComplete = createAsyncThunk(
   async ({id, isCompleted}, {rejectWithValue}) => {
     try {
       const response = await axiosInstance.patch(`/${id}`, {isCompleted});
-      console.log(response.data);
+      console.log(response.data.data);
       return {...response.data, id};
     } catch (error) {
       return rejectWithValue(
@@ -166,15 +174,13 @@ const todoSlice = createSlice({
       })
       .addCase(toggleComplete.fulfilled, (state, action) => {
         state.loading = false;
-        const {id, isCompleted} = action.payload;
-        const index = state.todos.findIndex(todo => todo._id === id);
+        // Assume API returns updated todo with _id and isCompleted
+        const updatedTodo = action.payload;
+        const index = state.todos.findIndex(todo => todo._id === updatedTodo._id);
         if (index !== -1) {
-          state.todos[index] = {
-            ...state.todos[index],
-            isCompleted: isCompleted,
-          };
+          state.todos[index] = { ...state.todos[index], ...updatedTodo };
         }
-      })
+      })      
       .addCase(toggleComplete.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;

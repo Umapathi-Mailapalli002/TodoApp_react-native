@@ -2,6 +2,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import { indianFormatTime } from '../utils/indianFormatTime';
 
 const Todo = ({todo, onClick, toggleToComplete}) => {
   const {title, description, isCompleted, createdAt} = todo || {};
@@ -9,7 +10,7 @@ const Todo = ({todo, onClick, toggleToComplete}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.timeText}>{createdAt}</Text>
+      <Text style={styles.timeText}>{indianFormatTime(createdAt)}</Text>
 
       {/* Content Section */}
       <View style={styles.innerContainer}>
