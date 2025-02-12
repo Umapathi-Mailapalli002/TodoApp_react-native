@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axiosInstance from "../../utils/axiosInstance";
+import axiosInstance from "../../utils/axiosInstance.js";
 
 export const createTodo = createAsyncThunk('todos/createTodo', async({title, description}, {rejectWithValue})=> {
    try {
@@ -73,7 +73,7 @@ const initialState = {
 }
 
 const todoSlice = createSlice({
-    name: "Todos",
+    name: "todos",
     initialState,
     reducers: {},
     extraReducers: (builder) => {

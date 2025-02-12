@@ -3,19 +3,20 @@ import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-const Todo = () => {
-  const [isChecked, setIsChecked] = useState(false);
+const Todo = ({todo, onClick}) => {
+  const {title, description, isCompleted, createdAt} = todo || {};
+  const [isChecked, setIsChecked] = useState(isCompleted);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.timeText}>03/02/2025 11:30</Text>
+      <Text style={styles.timeText}>{createdAt}</Text>
 
       {/* Content Section */}
       <View style={styles.innerContainer}>
         {/* Text Section */}
         <View style={styles.textContainer}>
-          <Text style={styles.title}>Title</Text>
-          <Text style={styles.description}>Description</Text>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.description}>{description}</Text>
         </View>
 
         {/* Icons Section */}
@@ -31,7 +32,7 @@ const Todo = () => {
           />
           </View>
           <View>
-          <Icon  name="delete-outline" size={30} color="red" />
+          <Icon onPress={onClick} name="delete-outline" size={30} color="red" />
           </View>
         </View>
       </View>

@@ -1,39 +1,38 @@
-import React, {useEffect} from "react";
-import { store } from "../store/index";
-import { Provider, useDispatch, useSelector } from "react-redux";
-import Todo from "./Todo.jsx";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import Form from "./Form.jsx";
-import { getAllTodos } from "./features/todoSlice.js";
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import Todo from './Todo.jsx';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import Form from './Form.jsx';
+import {getAllTodos} from './features/todoSlice.js';
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllTodos())
-  }, [dispatch])
-  const data = useSelector((state) => state.todos);
-  console.log(data)
-  return (<Provider store={store}>
+    dispatch(getAllTodos());
+  }, [dispatch]);
+  const data = useSelector(state => state.todos);
+  console.log(data);
+  return (
     <SafeAreaView>
       <View style={styles.container}>
         <Text style={styles.heading}>Todo App</Text>
         <Form />
-      <Todo />
+        <Todo />
       </View>
     </SafeAreaView>
-  </Provider>)
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
   },
   heading: {
     fontSize: 30,
-    color: "#0000ff",
+    color: '#0000ff',
     fontWeight: 'bold',
     textAlign: 'center',
-    marginVertical: 30
-  }
-})
+    marginVertical: 30,
+  },
+});
 export default App;
