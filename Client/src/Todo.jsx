@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-const Todo = ({todo, onClick}) => {
+const Todo = ({todo, onClick, toggleToComplete}) => {
   const {title, description, isCompleted, createdAt} = todo || {};
   const [isChecked, setIsChecked] = useState(isCompleted);
 
@@ -22,17 +22,23 @@ const Todo = ({todo, onClick}) => {
         {/* Icons Section */}
         <View style={styles.iconsContainer}>
           <View>
-          <BouncyCheckbox 
-            size={25}
-            fillColor="red"
-            unFillColor="#FFFFFF"
-            iconStyle={{borderColor: 'red'}}
-            innerIconStyle={{borderWidth: 2}}
-            onPress={() => setIsChecked(!isChecked)}
-          />
+            <BouncyCheckbox
+              isChecked={isChecked}
+              size={25}
+              fillColor="red"
+              unFillColor="#FFFFFF"
+              iconStyle={{borderColor: 'red'}}
+              innerIconStyle={{borderWidth: 2}}
+              onPress={toggleToComplete}
+            />
           </View>
           <View>
-          <Icon onPress={onClick} name="delete-outline" size={30} color="red" />
+            <Icon
+              onPress={onClick}
+              name="delete-outline"
+              size={30}
+              color="red"
+            />
           </View>
         </View>
       </View>

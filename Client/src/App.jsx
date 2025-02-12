@@ -1,23 +1,35 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Todo from './Todo.jsx';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Form from './Form.jsx';
-import {getAllTodos} from './features/todoSlice.js';
+import {deleteTodo, getAllTodos, toggleComplete} from './features/todoSlice.js';
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllTodos());
   }, [dispatch]);
-  const data = useSelector(state => state.todos);
+  const {data} = useSelector(state => state.todos.todos);
   console.log(data);
+
+  const handleComplete = (item) => {
+    console.log(item.isCompleted)
+    dispatch(toggleComplete({
+      id: item._id,
+      isCompleted: !item.isCompleted,
+    }))
+  }
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <Text style={styles.heading}>Todo App</Text>
         <Form />
-        <Todo />
+        <FlatList
+          data={data}
+          keyExtractor={item => item._id}
+          renderItem={({item}) => <Todo todo={item} toggleToComplete={() => handleComplete(item)} onClick={() => dispatch(deleteTodo({id:item._id}))}/>}
+        />
       </View>
     </SafeAreaView>
   );
