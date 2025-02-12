@@ -1,10 +1,18 @@
+import React, {useEffect} from "react";
 import { store } from "../store/index";
-import { Provider } from "react-redux";
-import Todo from "./Todo";
+import { Provider, useDispatch, useSelector } from "react-redux";
+import Todo from "./Todo.jsx";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import Form from "./Form";
+import Form from "./Form.jsx";
+import { getAllTodos } from "./features/todoSlice.js";
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllTodos())
+  }, [dispatch])
+  const data = useSelector((state) => state.todos);
+  console.log(data)
   return (<Provider store={store}>
     <SafeAreaView>
       <View style={styles.container}>
