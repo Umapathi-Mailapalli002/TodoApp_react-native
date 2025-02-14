@@ -7,9 +7,14 @@ const Form = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [des, setDes] = useState('');
+  const handleTitleChange = (title) => {
+    setTitle(title);
+  }
+  const handleDesChange = (des) => {
+    setDes(des);
+  }
   const addTodo = () => {
-    const t = JSON.stringify(title)
-    console.log(t);
+    console.log(title, des)
     dispatch(createTodo({
       title: title,
       description: des
@@ -18,9 +23,9 @@ const Form = () => {
   return (
     <View>
       <Text style={styles.label}>Title</Text>
-      <TextInput style={styles.input} onChange={setTitle} value={title} placeholder="Enter todo title" />
+      <TextInput style={styles.input} onChange={handleTitleChange} value={title} placeholder="Enter todo title" />
       <Text style={styles.label}>Description</Text>
-      <TextInput style={styles.input} value={des} onChange={setDes} placeholder="Enter todo description" />
+      <TextInput style={styles.input} value={des} onChange={handleDesChange} placeholder="Enter todo description" />
       <TouchableOpacity style={styles.button} onPress={addTodo}>
         <Text style={styles.buttonText}>Add Todo</Text>
       </TouchableOpacity>
