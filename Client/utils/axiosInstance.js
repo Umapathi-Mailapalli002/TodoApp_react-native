@@ -1,7 +1,7 @@
-import axios from "axios";
-import API_BASE from "../config/index.js";
+import axios from 'axios';
+import API_BASE from '../config/index.js';
 const axiosInstance = axios.create({
-    baseURL: API_BASE,
-})
+  baseURL: API_BASE,
+});
 
-export default axiosInstance
+export default axiosInstance;

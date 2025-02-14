@@ -5,21 +5,15 @@ export const createTodo = createAsyncThunk(
   'todos/createTodo',
   async ({title, description}, {rejectWithValue}) => {
     try {
-      const response = await axiosInstance.post('/', {title, description},
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-        }
-      );
+      console.log(title, description)
+      const response = await axiosInstance.post('/', {title, description});
       return response.data;
     } catch (error) {
       // Extract a plain error message (or a simple object)
       const errorMessage =
-        error.response?.data?.message || error.message || 'Error on adding todo';
-      
-      console.error('Axios Error:', errorMessage);
+        error.response?.data?.message ||
+        error.message ||
+        'Error on adding todo';
       return rejectWithValue(errorMessage);
     }
   },
@@ -176,11 +170,13 @@ const todoSlice = createSlice({
         state.loading = false;
         // Assume API returns updated todo with _id and isCompleted
         const updatedTodo = action.payload;
-        const index = state.todos.findIndex(todo => todo._id === updatedTodo._id);
+        const index = state.todos.findIndex(
+          todo => todo._id === updatedTodo._id,
+        );
         if (index !== -1) {
-          state.todos[index] = { ...state.todos[index], ...updatedTodo };
+          state.todos[index] = {...state.todos[index], ...updatedTodo};
         }
-      })      
+      })
       .addCase(toggleComplete.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;

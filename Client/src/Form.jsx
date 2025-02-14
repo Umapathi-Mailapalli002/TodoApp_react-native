@@ -8,6 +8,8 @@ const Form = () => {
   const [title, setTitle] = useState('');
   const [des, setDes] = useState('');
   const addTodo = () => {
+    const t = JSON.stringify(title)
+    console.log(t);
     dispatch(createTodo({
       title: title,
       description: des

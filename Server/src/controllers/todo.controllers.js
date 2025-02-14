@@ -3,6 +3,7 @@ import { Todo } from "../models/todo.model.js";
 // Create a Todo
 const createTodo = async (req, res) => {
   try {
+    console.log(req.body);
     const { title, description } = req.body;
     if (!title || !description) {
       return res.status(400).json({ success: false, message: "Title and content are required", data: {} });
