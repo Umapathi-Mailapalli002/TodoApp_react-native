@@ -5,10 +5,8 @@ export const createTodo = createAsyncThunk(
   'todos/createTodo',
   async ({title, description}, {rejectWithValue}) => {
     try {
-      const todoData = {title, description};
-      console.log({...todoData});
       const response = await axiosInstance.post('/', {
-        ...todoData,
+        title, description
       });
       return response.data;
     } catch (error) {
@@ -109,7 +107,7 @@ const todoSlice = createSlice({
       })
       .addCase(createTodo.fulfilled, (state, action) => {
         state.loading = false;
-        state.todos.unshift(action.payload);
+        state.todos.unshift(action.payload.data);
       })
       .addCase(createTodo.rejected, (state, action) => {
         state.loading = false;

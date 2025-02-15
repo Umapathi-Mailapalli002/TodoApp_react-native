@@ -3,7 +3,6 @@ import { Todo } from "../models/todo.model.js";
 // Create a Todo
 const createTodo = async (req, res) => {
   try {
-    console.log(req.body);
     const { title, description } = req.body;
     if (!title || !description) {
       return res.status(400).json({ success: false, message: "Title and content are required", data: {} });
@@ -73,7 +72,7 @@ const deleteTodo = async (req, res) => {
 // Get all Todos
 const getAllTodos = async (_, res) => {
   try {
-    const getTodos = await Todo.find({});
+    const getTodos = await Todo.find({}).sort({createdAt: -1});
     return res.status(200).json({
       success: true,
       message: "Todos fetched successfully",
