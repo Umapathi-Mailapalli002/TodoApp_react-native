@@ -5,33 +5,44 @@ import { createTodo } from './features/todoSlice';
 
 const Form = () => {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState('');
-  const [des, setDes] = useState('');
-  const handleTitleChange = (title) => {
-    setTitle(title);
-  }
-  const handleDesChange = (des) => {
-    setDes(des);
-  }
-  const addTodo = () => {
-    console.log(title, des)
-    dispatch(createTodo({
-      title: title,
-      description: des
-    }))
+  const [title, setTitle] = useState('')
+  const [des, setDes] = useState('')
+
+  const handleTitleChange = (text) => {
+    setTitle(text);
   };
+
+  const handleDesChange = (text) => {
+    setDes(text);
+  };
+
+  const addTodo = () => {
+    dispatch(createTodo({title: title, description: des}));
+  };
+
   return (
     <View>
       <Text style={styles.label}>Title</Text>
-      <TextInput style={styles.input} onChange={handleTitleChange} value={title} placeholder="Enter todo title" />
+      <TextInput
+        style={styles.input}
+        onChangeText={handleTitleChange}
+        value={title}
+        placeholder="Enter todo title"
+      />
       <Text style={styles.label}>Description</Text>
-      <TextInput style={styles.input} value={des} onChange={handleDesChange} placeholder="Enter todo description" />
+      <TextInput
+        style={styles.input}
+        onChangeText={handleDesChange}
+        value={des}
+        placeholder="Enter todo description"
+      />
       <TouchableOpacity style={styles.button} onPress={addTodo}>
         <Text style={styles.buttonText}>Add Todo</Text>
       </TouchableOpacity>
     </View>
   );
 };
+
 
 export default Form;
 

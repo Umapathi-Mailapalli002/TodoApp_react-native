@@ -5,8 +5,11 @@ export const createTodo = createAsyncThunk(
   'todos/createTodo',
   async ({title, description}, {rejectWithValue}) => {
     try {
-      console.log(title, description)
-      const response = await axiosInstance.post('/', {title, description});
+      const todoData = {title, description};
+      console.log({...todoData});
+      const response = await axiosInstance.post('/', {
+        ...todoData,
+      });
       return response.data;
     } catch (error) {
       // Extract a plain error message (or a simple object)
