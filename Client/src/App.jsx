@@ -7,13 +7,11 @@ import { deleteTodo, getAllTodos, toggleComplete } from './features/todoSlice.js
 
 const App = () => {
   const dispatch = useDispatch();
-
+  const { data } = useSelector(state => state.todos.todos);
+  console.log(data);
   useEffect(() => {
     dispatch(getAllTodos());
   }, [dispatch]);
-
-  const { data } = useSelector(state => state.todos.todos);
-  console.log(data);
 
   return (
     <SafeAreaView style={styles.container}>

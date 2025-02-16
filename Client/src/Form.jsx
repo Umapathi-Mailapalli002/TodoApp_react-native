@@ -1,8 +1,7 @@
 import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createTodo } from './features/todoSlice';
-import { getAllTodos } from './features/todoSlice.js';
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -15,9 +14,6 @@ const Form = () => {
   const handleDesChange = (text) => {
     setDes(text);
   };
-  useEffect(() => {
-    dispatch(getAllTodos());
-  }, [dispatch]);
   const addTodo = () => {
     dispatch(createTodo({title: title, description: des}));
     setDes('')
