@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Todo from './Todo.jsx';
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
@@ -9,10 +9,6 @@ const App = () => {
   const dispatch = useDispatch();
   const { data } = useSelector(state => state.todos.todos);
   console.log(data);
-  useEffect(() => {
-    dispatch(getAllTodos());
-  }, [dispatch]);
-
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.heading}>Todo App</Text>
