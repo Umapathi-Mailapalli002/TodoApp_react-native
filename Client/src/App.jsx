@@ -27,7 +27,10 @@ const App = () => {
                 })
               )
             }
-            onClick={() => dispatch(deleteTodo({ id: item._id }))}
+            onClick={() => {
+              dispatch(deleteTodo({ id: item._id }))
+              dispatch(getAllTodos())
+            }}
           />
         )}
         contentContainerStyle={{ paddingBottom: 20 }} // Ensure bottom padding
