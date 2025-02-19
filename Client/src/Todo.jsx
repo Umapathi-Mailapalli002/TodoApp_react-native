@@ -16,8 +16,8 @@ const Todo = ({todo, onClick, toggleToComplete}) => {
       <View style={styles.innerContainer}>
         {/* Text Section */}
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.description}>{description}</Text>
+          <Text style={[ isChecked ? styles.titleCompleted : styles.title]}>{title}</Text>
+          <Text style={[ isChecked ? styles.descriptionCompleted : styles.description]}>{description}</Text>
         </View>
 
         {/* Icons Section */}
@@ -25,6 +25,7 @@ const Todo = ({todo, onClick, toggleToComplete}) => {
           <View>
             <BouncyCheckbox
               isChecked={isChecked}
+              disableText={true}
               size={25}
               fillColor="red"
               unFillColor="#FFFFFF"
@@ -74,6 +75,16 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 18,
     color: '#555',
+  },
+  titleCompleted: {
+    fontSize: 22,
+    fontWeight: '600',
+    textDecorationLine: 'line-through',
+  },
+  descriptionCompleted: {
+    fontSize: 18,
+    color: '#555',
+    textDecorationLine: 'line-through',
   },
   iconsContainer: {
     flex: 1,
