@@ -153,8 +153,10 @@ const todoSlice = createSlice({
       })
       .addCase(deleteTodo.fulfilled, (state, action) => {
         state.loading = false;
+        const {id} = action.payload
+        console.log(action.payload);
         state.todos = state.todos.filter(
-          todo => todo._id !== action.payload.id,
+          todo => todo._id !== id,
         );
       })
       .addCase(deleteTodo.rejected, (state, action) => {

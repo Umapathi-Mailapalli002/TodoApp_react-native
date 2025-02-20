@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Todo from './Todo.jsx';
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
@@ -8,13 +8,23 @@ import { deleteTodo, getAllTodos, toggleComplete } from './features/todoSlice.js
 const App = () => {
   const dispatch = useDispatch();
   const { data } = useSelector(state => state.todos.todos);
-  console.log(data);
   const [editData, setEditData] = useState(null)
-  handleEdit = (item) => {
+
+  const handleDelete = (item) => {
+    dispatch(deleteTodo({ id: item._id }));
+  }
+
+  // Memoized handleEdit function
+  const handleEdit = useCallback((item) => {
     setEditData(item);
     console.log(item);
     console.log(editData);
-  }
+  }, [editData]);
+
+  useEffect(() => {
+    dispatch(getAllTodos());
+  }, [dispatch, handleDelete]);
+
   const clearEditData = () => {
     setEditData(null);
   };
