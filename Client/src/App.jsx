@@ -8,22 +8,18 @@ import { deleteTodo, getAllTodos } from './features/todoSlice.js';
 const App = () => {
   const dispatch = useDispatch();
   const { data } = useSelector(state => state.todos.todos);
+  const [todos, setTodos] = useState(null);
   const [editData, setEditData] = useState(null)
 
   const handleDelete = (item) => {
+    const newTodos = data.filter((todo) => todo._id !== item._id);
+    setTodos(newTodos);
     dispatch(deleteTodo({ id: item._id }));
   }
-
   // Memoized handleEdit function
   const handleEdit = useCallback((item) => {
     setEditData(item);
-    console.log(item);
-    console.log(editData);
   }, [editData]);
-
-  useEffect(() => {
-    dispatch(getAllTodos());
-  }, [dispatch, handleDelete]);
 
   const clearEditData = () => {
     setEditData(null);
@@ -33,7 +29,7 @@ const App = () => {
       <Text style={styles.heading}>Todo App</Text>
       <Form toEditData={editData} clearEditData={clearEditData}/>
       <FlatList
-        data={data}
+        data={!todos ? data : todos}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
           <Todo

@@ -42,7 +42,7 @@ const Todo = ({todo, handleDelete, handleEdit}) => {
             />
           </View>
           <View>
-            {!isCompleted && <Icon
+            {!isChecked && <Icon
               onPress={handleEdit}
               name="clipboard-edit-outline"
               size={30}
