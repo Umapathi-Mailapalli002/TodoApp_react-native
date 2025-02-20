@@ -75,7 +75,7 @@ export const toggleComplete = createAsyncThunk(
   'todos/toggleComplete',
   async ({id, isCompleted}, {rejectWithValue}) => {
     try {
-      const response = await axiosInstance.patch(`/${id}`, {isCompleted});
+      const response = await axiosInstance.patch(`/toggle/${id}`, {isCompleted});
       console.log(response.data.data);
       return {...response.data, id};
     } catch (error) {

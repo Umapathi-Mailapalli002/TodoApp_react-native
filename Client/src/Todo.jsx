@@ -3,11 +3,18 @@ import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { indianFormatTime } from '../utils/indianFormatTime';
+import { useDispatch } from 'react-redux';
+import { toggleComplete } from './features/todoSlice';
 
-const Todo = ({todo, handleDelete, handleEdit, toggleToComplete}) => {
-  const {title, description, isCompleted, createdAt} = todo || {};
+const Todo = ({todo, handleDelete, handleEdit}) => {
+  const {_id, title, description, isCompleted, createdAt} = todo || {};
   const [isChecked, setIsChecked] = useState(isCompleted);
+  const dispatch = useDispatch();
 
+  const toggleToComplete = () => {
+    dispatch(toggleComplete({ id: _id, isCompleted: !isChecked }));
+    setIsChecked(!isChecked);
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.timeText}>{indianFormatTime(createdAt)}</Text>

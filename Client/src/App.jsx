@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Todo from './Todo.jsx';
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Form from './Form.jsx';
-import { deleteTodo, getAllTodos, toggleComplete } from './features/todoSlice.js';
+import { deleteTodo, getAllTodos } from './features/todoSlice.js';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,14 +38,6 @@ const App = () => {
         renderItem={({ item }) => (
           <Todo
             todo={item}
-            toggleToComplete={() =>
-              dispatch(
-                toggleComplete({
-                  id: item._id,
-                  isCompleted: !item.isCompleted,
-                })
-              )
-            }
             handleDelete={() => handleDelete(item)}
             handleEdit={() => handleEdit(item)}
           />
