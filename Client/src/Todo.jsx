@@ -35,13 +35,13 @@ const Todo = ({todo, handleDelete, handleEdit, toggleToComplete}) => {
             />
           </View>
           <View>
-            <Icon
+            {!isCompleted && <Icon
               onPress={handleEdit}
               name="clipboard-edit-outline"
               size={30}
               color="green"
               style={{marginLeft: 5}}
-            />
+            />}
           </View>
           <View>
             <Icon
