@@ -9,10 +9,19 @@ const App = () => {
   const dispatch = useDispatch();
   const { data } = useSelector(state => state.todos.todos);
   console.log(data);
+  const [editData, setEditData] = useState(null)
+  handleEdit = (item) => {
+    setEditData(item);
+    console.log(item);
+    console.log(editData);
+  }
+  const clearEditData = () => {
+    setEditData(null);
+  };
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.heading}>Todo App</Text>
-      <Form />
+      <Form toEditData={editData} clearEditData={clearEditData}/>
       <FlatList
         data={data}
         keyExtractor={(item) => item._id}
@@ -27,10 +36,8 @@ const App = () => {
                 })
               )
             }
-            onClick={() => {
-              dispatch(deleteTodo({ id: item._id }))
-              dispatch(getAllTodos())
-            }}
+            handleDelete={() => handleDelete(item)}
+            handleEdit={() => handleEdit(item)}
           />
         )}
         contentContainerStyle={{ paddingBottom: 20 }}

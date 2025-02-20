@@ -1,56 +1,92 @@
-import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { createTodo, getAllTodos } from './features/todoSlice';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {useDispatch} from 'react-redux';
+import {createTodo, getAllTodos, updateTodo} from './features/todoSlice';
 
-const Form = () => {
+const Form = ({toEditData, clearEditData}) => {
   const dispatch = useDispatch();
   const [isTodoAdded, setIsTodoAdded] = useState(false);
-  const [title, setTitle] = useState('')
-  const [des, setDes] = useState('')
- useEffect(() => {
+  const [title, setTitle] = useState('');
+  const [des, setDes] = useState('');
+  const inputRef = useRef(null);
+  useEffect(() => {
     dispatch(getAllTodos());
   }, [dispatch, isTodoAdded]);
-  const handleTitleChange = (text) => {
+
+  useEffect(() => {
+    if (toEditData) {
+      setTitle(toEditData?.title);
+    setDes(toEditData?.description);
+    inputFocus();
+    }
+  }, [toEditData]);
+
+  console.log(toEditData?.title, toEditData?.description);
+  const handleTitleChange = text => {
     setTitle(text);
-    setIsTodoAdded(false);
-
   };
-  const handleDesChange = (text) => {
+
+  const handleDesChange = text => {
     setDes(text);
-    setIsTodoAdded(false);
+  };
 
-  };
   const addTodo = () => {
-    dispatch(createTodo({title: title, description: des}));
-    setIsTodoAdded(true);
-    setDes('')
-    setTitle('')
+    if (toEditData) {
+      dispatch(
+        updateTodo({id: toEditData._id, title: title, description: des}),
+      );
+      setIsTodoAdded(true);
+      clearEditData();
+      inputBlur();
+    } else {
+      dispatch(createTodo({title: title, description: des}));
+      setIsTodoAdded(true);
+    }
+    setDes('');
+    setTitle('');
   };
+
+const inputFocus = () => {
+  if (inputRef.current) {
+    inputRef.current.focus();
+  }
+}
+const inputBlur = () => {
+  if (inputRef.current) {
+    inputRef.current.blur();
+  }
+}
 
   return (
     <View>
       <Text style={styles.label}>Title</Text>
-      <TextInput
+      <TextInput ref={inputRef}
         style={styles.input}
         onChangeText={handleTitleChange}
         value={title}
         placeholder="Enter todo title"
       />
       <Text style={styles.label}>Description</Text>
-      <TextInput
+      <TextInput ref={inputRef}
         style={styles.input}
         onChangeText={handleDesChange}
         value={des}
         placeholder="Enter todo description"
       />
       <TouchableOpacity style={styles.button} onPress={addTodo}>
-        <Text style={styles.buttonText}>Add Todo</Text>
+        <Text style={styles.buttonText}>
+          {!toEditData ? 'Add Todo' : 'Update Todo'}
+        </Text>
       </TouchableOpacity>
     </View>
   );
 };
-
 
 export default Form;
 
@@ -69,7 +105,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',
-    marginVertical: 8
+    marginVertical: 8,
   },
   buttonText: {
     color: 'white',
