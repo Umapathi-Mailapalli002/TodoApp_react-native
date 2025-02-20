@@ -12,12 +12,13 @@ import {createTodo, getAllTodos, updateTodo} from './features/todoSlice';
 const Form = ({toEditData, clearEditData}) => {
   const dispatch = useDispatch();
   const [isTodoAdded, setIsTodoAdded] = useState(false);
+  const [isTodoEdited, setIsTodoEdited] = useState(false);
   const [title, setTitle] = useState('');
   const [des, setDes] = useState('');
   const inputRef = useRef(null);
   useEffect(() => {
     dispatch(getAllTodos());
-  }, [dispatch, isTodoAdded]);
+  }, [dispatch, isTodoAdded, isTodoEdited]);
 
   useEffect(() => {
     if (toEditData) {
@@ -30,10 +31,14 @@ const Form = ({toEditData, clearEditData}) => {
   console.log(toEditData?.title, toEditData?.description);
   const handleTitleChange = text => {
     setTitle(text);
+    setIsTodoAdded(false)
+    setIsTodoEdited(false)
   };
 
   const handleDesChange = text => {
     setDes(text);
+    setIsTodoAdded(false)
+    setIsTodoEdited(false)
   };
 
   const addTodo = () => {
@@ -41,11 +46,12 @@ const Form = ({toEditData, clearEditData}) => {
       dispatch(
         updateTodo({id: toEditData._id, title: title, description: des}),
       );
-      setIsTodoAdded(true);
+      setIsTodoEdited(true);
       clearEditData();
       inputBlur();
     } else {
       dispatch(createTodo({title: title, description: des}));
+      inputBlur();
       setIsTodoAdded(true);
     }
     setDes('');
