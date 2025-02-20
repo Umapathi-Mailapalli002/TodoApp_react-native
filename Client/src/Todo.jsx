@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { indianFormatTime } from '../utils/indianFormatTime';
 
-const Todo = ({todo, onClick, toggleToComplete}) => {
+const Todo = ({todo, handleDelete, handleEdit, toggleToComplete}) => {
   const {title, description, isCompleted, createdAt} = todo || {};
   const [isChecked, setIsChecked] = useState(isCompleted);
 
@@ -36,7 +36,16 @@ const Todo = ({todo, onClick, toggleToComplete}) => {
           </View>
           <View>
             <Icon
-              onPress={onClick}
+              onPress={handleEdit}
+              name="clipboard-edit-outline"
+              size={30}
+              color="green"
+              style={{marginLeft: 5}}
+            />
+          </View>
+          <View>
+            <Icon
+              onPress={handleDelete}
               name="delete-outline"
               size={30}
               color="red"
@@ -91,6 +100,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
+    gap: 3
   },
 });
 

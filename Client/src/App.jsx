@@ -33,8 +33,8 @@ const App = () => {
             }}
           />
         )}
-        contentContainerStyle={{ paddingBottom: 20 }} // Ensure bottom padding
-        showsVerticalScrollIndicator={false} // Hide scrollbar for cleaner UI
+        contentContainerStyle={{ paddingBottom: 20 }}
+        showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
   );
