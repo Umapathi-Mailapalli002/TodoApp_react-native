@@ -89,7 +89,7 @@ const toggleCompleted = async (req, res) => {
   try {
     const { id } = req.params;
     const { isCompleted } = req.body; 
-
+    console.log(req.body);
     if (typeof isCompleted !== "boolean") {
       return res.status(400).json({ success: false, message: "Invalid completion status", data: {} });
     }

@@ -14,6 +14,5 @@ router
   .route("/:id")
   .delete(deleteTodo)
   .patch(updateTodo)
-  .patch(toggleCompleted);
-
+router.route("/toggle/:id").patch(toggleCompleted)
 export default router;
